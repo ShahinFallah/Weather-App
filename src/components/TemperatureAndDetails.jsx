@@ -11,15 +11,15 @@ import {
 export default function TemperatureAndDetails() {
     return (
         <>
-            <div className="flex items-center justify-center py-6 text-xl text-cyan-300">
+            <div className="flex items-center justify-center py-3 text-xl text-cyan-300">
                 <p>Clear</p>
             </div>
 
-            <div className="flex flex-row items-center justify-between text-white py-3">
-                <img className="w-20" src="http://openweathermap.org/img/wn/01d@2x.png" />
-                <p className="text-5xl ml-11">34°</p>
-                <div className="flex flex-col space-y-2">
-                    <div className="flex font-light text-sm items-center justify-center">
+            <div className="flex flex-row items-center justify-between text-white py-3  mb-8">
+                <img className="ml-5 w-25" src="http://openweathermap.org/img/wn/01d@2x.png" />
+                <p className="text-5xl ml-2.5">34°</p>
+                <div className="flex flex-col space-y-3">
+                    <div className="flex font-light text-sm items-center justify-center mr-2.5">
                         <UilTemperature className='mr-1' size={18} />
                         Real feel:
                         <span className='font-medium ml-1'>32°</span>
@@ -37,7 +37,7 @@ export default function TemperatureAndDetails() {
                 </div>
             </div>
 
-            <div className='flex flex-row items-center justify-center space-x-2 text-white text-sm py-3 my-6'>
+            <div className='flex flex-row items-center justify-center space-x-3 text-white text-sm py-3 my-6'>
                 <UilSun />
                 <p className='font-light'>
                     Rise:
