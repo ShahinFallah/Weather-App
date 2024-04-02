@@ -5,7 +5,7 @@ export default function TopButtons({dispatch}) {
     const cities = [
         {
             id:1,
-            title:'Landon'
+            title:'London'
         },
         {
             id:2,
