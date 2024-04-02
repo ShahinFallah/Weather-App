@@ -45,8 +45,7 @@ const getFormattedWeatherData = async searchParams => {
 const iconUrlFromCode = (code) => `http://openweathermap.org/img/wn/${code}@2x.png`
 
 const formatToLocalTime = (secs, zone, format = "cccc, dd, LLL, yyyy' | Local time: 'hh:mm a") => {
-    if (isNaN(secs) || isNaN(zone)) return;
-    DateTime.fromSeconds(secs).setZone(zone).toFormat(format)
+    return DateTime.fromSeconds(secs).setZone(zone).toFormat(format)
 }
 
 export { getFormattedWeatherData, iconUrlFromCode, formatToLocalTime }
