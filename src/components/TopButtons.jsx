@@ -1,5 +1,6 @@
+import { ACTIONS } from "../action/ACTIONS"
 
-export default function TopButtons() {
+export default function TopButtons({dispatch}) {
 
     const cities = [
         {
@@ -26,7 +27,7 @@ export default function TopButtons() {
 
   return <div className="flex items-center justify-around my-6">
     {cities.map(city => (
-        <button key={city.id} className="text-white text-lg font-medium transition ease-out hover:scale-110">{city.title}</button>
+        <button onClick={() => {dispatch({type:ACTIONS.QUERY, data:{q:city.title}})}} key={city.id} className="text-white text-lg font-medium transition ease-out hover:scale-110">{city.title}</button>
     ))}
   </div>
 }
