@@ -3,7 +3,7 @@
 ### If you want to see it demo, click on the image
 
 <a href = 'https://google.com'>
-  <img style="width:85%;" src='https://s8.uupload.ir/files/weather-app_xqtd.png'>
+  <img style="width:100%;" src='https://s8.uupload.ir/files/weather-app_xqtd.png'>
 </a>
 
 > ### <b>Note</b>: This is a free API and may have issues such as delays in fetching weather
