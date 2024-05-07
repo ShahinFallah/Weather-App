@@ -9,7 +9,7 @@ import {
 } from '@iconscout/react-unicons'
 import { formatToLocalTime, iconUrlFromCode } from '../services/weatherService'
 
-export default function TemperatureAndDetails({weather:{details,icon,temp,temp_min,temp_max,sunrise,sunset,speed,humidity,feels_like, timezone
+export default function TemperatureAndDetails({weather:{details,icon,temp,tempmin,tempmax,sunrise,sunset,speed,humidity,feelslike, timezone
 }}) {
     return (
         <>
@@ -17,14 +17,14 @@ export default function TemperatureAndDetails({weather:{details,icon,temp,temp_m
                 <p>{details}</p>
             </div>
 
-            <div className="flex flex-row items-center justify-between text-white py-3  mb-8">
-                <img className="ml-5 w-25" src={iconUrlFromCode(icon)} />
+            <div className="flex flex-row items-center justify-between text-white py-3 mb-5">
+                <img className="ml-5 w-24" src={iconUrlFromCode(icon)} />
                 <p className="text-5xl ml-2.5">{`${Math.round(temp)}°`}</p>
                 <div className="flex flex-col space-y-3">
                     <div className="flex font-light text-sm items-center justify-center mr-2.5">
                         <UilTemperature className='mr-1' size={18} />
                         Real feel:
-                        <span className='font-medium ml-1'>{`${feels_like}°`}</span>
+                        <span className='font-medium ml-1'>{`${feelslike}°`}</span>
                     </div>
                     <div className="flex font-light text-sm items-center justify-center">
                         <UilTear className='mr-1' size={18} />
@@ -55,13 +55,13 @@ export default function TemperatureAndDetails({weather:{details,icon,temp,temp_m
                 <UilArrowUp />
                 <p className='font-light'>
                     High:
-                    <span className='font-medium ml-1'>{`${Math.round(temp_max)}°`}</span>
+                    <span className='font-medium ml-1'>{`${Math.round(tempmax)}°`}</span>
                 </p>
                 <p className='font-light'>|</p>
                 <UilArrowDown />
                 <p className='font-light'>
                     Low:
-                    <span className='font-medium ml-1'>{`${Math.round(temp_min)}°`}</span>
+                    <span className='font-medium ml-1'>{`${Math.round(tempmin)}°`}</span>
                 </p>
             </div>
 

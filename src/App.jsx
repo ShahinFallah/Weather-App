@@ -1,4 +1,3 @@
-import UilReact from '@iconscout/react-unicons/icons/uil-react'
 import TopButtons from './components/TopButtons'
 import Inputs from './components/Inputs'
 import TimeAndLocation from './components/TimeAndLocation'
@@ -8,67 +7,92 @@ import { useEffect, useReducer } from 'react'
 import { ACTIONS } from './action/ACTIONS'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ForecastList from './components/ForecastList'
 
 export default function App() {
 
+  // Reducer function to manage state updates based on dispatched actions
   const reducer = (state, { type, data }) => {
     switch (type) {
-      case 'query': return { ...state, query: { ...data } }
-      case 'units': return { ...state, units: { units: data } }
-      case 'weather': return { ...state, weather: data }
+      // Update the path in state based on the dispatched action type 'query'
+      case 'query':
+        return { ...state, path: data.path }
+      // Update the unitGroup in state based on the dispatched action type 'units'
+      case 'units':
+        return { ...state, unitGroup: { unitGroup: data } }
+      // Update the weather data in state based on the dispatched action type 'weather'
+      case 'weather':
+        return { ...state, weather: data }
     }
   }
 
+  // Initialize state using useReducer hook, providing the reducer function and initial state
   const [state, dispatch] = useReducer(reducer, {
-    query: { q: 'canada' },
-    units: { units: 'metric' },
-    weather: null
+    path: 'canada', // Default path
+    unitGroup: { unitGroup: 'metric' }, // Default unit group
+    weather: null // Default weather data
   })
 
+  // useEffect hook to fetch weather data when state.path or state.unitGroup changes
   useEffect(() => {
+    // Function to fetch weather data from the API and dispatch the 'weather' action to update state
     const fetchWeather = async () => {
-      const message = state.query.q ? state.query.q : 'current location'
+      // Determine the location for which weather is being fetched
+      const message = state.path ? state.path : 'current location'
 
+      // Display a toast message indicating that weather data is being fetched
       toast.info('fetching weather for ' + message)
-      await getFormattedWeatherData({ ...state.query, ...state.units })
-        .then(data => {
-          if(typeof data != 'object') return
 
-          toast.success(`successfully fetched weather for ${data.name}`)
+      // Fetch formatted weather data using the current unit group and location path
+      await getFormattedWeatherData({ ...state.unitGroup }, state.path)
+        .then(data => {
+          // Display a success toast message after successfully fetching weather data
+          toast.success(`successfully fetched weather for ${data.country}`)
+          // Dispatch the 'weather' action to update state with the fetched weather data
           dispatch({ type: ACTIONS.WEATHER, data: data })
         })
     }
 
+    // Call the fetchWeather function when state.path or state.unitGroup changes
     fetchWeather()
-  }, [state.query, state.units])
+  }, [state.path, state.unitGroup])
 
+  // Function to determine the background gradient based on weather data
   const formatBackground = () => {
+    // If weather data is not available, return a default background gradient
     if (!state.weather) return 'from-cyan-700 to-blue-700'
-    const threshold = state.units === 'metric' ? 20 : 60
 
+    // Define threshold temperature based on the unit group (metric or imperial)
+    const threshold = state.unitGroup === 'metric' ? 20 : 60
+
+    // Determine the background gradient based on the current temperature compared to the threshold
     if (state.weather.temp <= threshold)
       return 'from-cyan-700 to-blue-700'
     else
       return 'from-yellow-700 to-orange-700'
-
   }
 
   return (
     <>
-      <div className={`rounded mx-auto max-w-screen-md mt-4 py-5 px-20 bg-gradient-to-br ${formatBackground()} shadow-xl shadow-gray-400 `}>
-        <TopButtons dispatch={dispatch} />
-        <Inputs dispatch={dispatch} unit={state.units.units} />
+      <div className={`flex justify-center max-w-full h-screen py-5 bg-gradient-to-br  shadow-xl shadow-gray-400 ${formatBackground()}`}>
+        <div className='w-[48rem] shadow shadow-lg px-10 py-2'>
+          <TopButtons dispatch={dispatch} />
+          <Inputs dispatch={dispatch} unit={state.unitGroup.unitGroup} />
 
-        {state.weather && (
-          <>
-            <TimeAndLocation weather={state.weather} />
-            <TemperatureAndDetails weather={state.weather} />
-          </>
-        )}
+          {/* Render weather components if weather data is available */}
+          {state.weather && (
+            <>
+              <TimeAndLocation weather={state.weather} />
+              <TemperatureAndDetails weather={state.weather} />
+              <ForecastList title='HOURLY FORECAST' data={state.weather.hourly} />
+              <ForecastList title='DAILY FORECAST' data={state.weather.daily} />
+            </>
+          )}
+        </div>
+
+        {/* Render toast notifications container */}
+        <ToastContainer autoClose={2000} theme='colored' />
       </div>
-
-
-      <ToastContainer autoClose={5000} theme='colored' newestOnTop={true}/>
     </>
   )
 }
