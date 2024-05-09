@@ -1,9 +1,9 @@
 # App Weather
 
-### If you want to see it demo, click on the image
+### [Demo](#)
 
-<a href = 'https://google.com'>
-  <img style="width:100%;" src='https://s8.uupload.ir/files/weather-app_xqtd.png'>
+<a href = '#'>
+  <img style="width:100%;height:600px" src='https://s8.uupload.ir/files/newproject-madewithclipchamp-ezgif.com-crop_vs3.gif'>
 </a>
 
 > ### <b>Note</b>: This is a free API and may have issues such as delays in fetching weather
@@ -26,10 +26,12 @@ $ cd weather-app
 
 - useReducer<br>
 - useEffect<br>
-- props<br>
+- useRef<br>
 - and more . . .
 
 ## package & library installed
 
 > 1. luxon
 > 2. react-toastify
+> 3. iconscout/react-unicons
+> 4. swiper
