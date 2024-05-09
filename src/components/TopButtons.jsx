@@ -25,7 +25,7 @@ export default function TopButtons({dispatch}) {
         }
     ]
 
-  return <div className="flex items-center justify-around my-6">
+  return <div className="hidden items-center justify-around my-6  sm:flex">
     {cities.map(city => (
         <button onClick={() => {dispatch({type:ACTIONS.QUERY, data: {path:city.title}})}} key={city.id} className="text-white text-lg font-medium transition ease-out hover:scale-110">{city.title}</button>
     ))}

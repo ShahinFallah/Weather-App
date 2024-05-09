@@ -74,8 +74,8 @@ export default function App() {
 
   return (
     <>
-      <div className={`flex justify-center max-w-full h-screen py-5 bg-gradient-to-br  shadow-xl shadow-gray-400 ${formatBackground()}`}>
-        <div className='w-[48rem] shadow shadow-lg px-10 py-2'>
+      <div className={`fixed top-0 left-0 right-0 bottom-0 flex justify-center bg-gradient-to-br overflow-x-auto ${formatBackground()}`}>
+        <div className={`w-full px-1 py-2 sm:shadow-lg sm:px-10 sm:max-w-[48rem] sm:h-fit ${formatBackground()}`} >
           <TopButtons dispatch={dispatch} />
           <Inputs dispatch={dispatch} unit={state.unitGroup.unitGroup} />
 
@@ -84,8 +84,8 @@ export default function App() {
             <>
               <TimeAndLocation weather={state.weather} />
               <TemperatureAndDetails weather={state.weather} />
-              <ForecastList title='HOURLY FORECAST' data={state.weather.hourly} />
-              <ForecastList title='DAILY FORECAST' data={state.weather.daily} />
+                <ForecastList title='HOURLY FORECAST' data={state.weather.hourly} />
+                <ForecastList title='DAILY FORECAST' data={state.weather.daily} />
             </>
           )}
         </div>

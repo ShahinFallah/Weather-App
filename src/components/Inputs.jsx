@@ -25,23 +25,21 @@ export default function Inputs({ dispatch, unit }) {
 
   // Function to handle location button click for fetching user's current location
   const handleLocationClick = () => {
-    // Use geolocation API to fetch current location coordinates
     navigator.geolocation.getCurrentPosition((position) => {
-      // Display success toast message after successfully fetching location
       toast.success('location fetched')
       // Extract latitude and longitude from the fetched position
       let lat = position.coords.latitude
       let lon = position.coords.longitude
-      // Dispatch the 'query' action to update state with the fetched location coordinates
-      return dispatch({ type: ACTIONS.QUERY, data: { query: null, lat: lat, lon: lon } })
+
+      // return dispatch({ type: ACTIONS.QUERY, data: { query: null, lat: lat, lon: lon } }) ====> Fixing
     })
     // Display error toast message if location fetching fails
     toast.error('location not fetched')
   }
 
   return (
-    <div className='flex flex-row justify-center my-8'>
-      <form onSubmit={handleSearchClick} className='flex flex-row w-3/4 items-center justify-center space-x-4'>
+    <div className='flex flex-row justify-center sm:my-8'>
+      <form onSubmit={handleSearchClick} className='flex flex-row w-full items-center justify-center space-x-4'>
         <input onChange={e => setCity(e.target.value)} placeholder='Search for city...' type="text" className='my-4 rounded text-lg font-light py-1 px-5 outline-none w-full shadow-xl capitalize placeholder:lowercase' />
         <button>
           <UilSearch size="22" className='text-white cursor-pointer transition ease-out hover:scale-125' />
