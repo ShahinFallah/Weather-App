@@ -20,12 +20,15 @@ export default function ForecastList({ title, data }) {
             </div>
             <hr className='my-2' />
             <div className='overflow-x-hidden'>
-                <div className='flex flex-row items-center justify-between text-white min-w-[35rem] space-x-7 sm:space-x-0'>
+                <div className='flex flex-row items-center justify-between text-white'>
                     <Swiper
                         modules={[A11y]}
+                        slidesPerView={2}
                         spaceBetween={1}
-                        slidesPerView={3}
                         breakpoints={{
+                            500: {
+                                slidesPerView:3
+                            },
                             640: {
                                 slidesPerView:5,
                                 spaceBetween:50
