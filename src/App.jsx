@@ -8,6 +8,7 @@ import { ACTIONS } from './action/ACTIONS'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ForecastList from './components/ForecastList'
+import loadingStyle from './utils/loading.module.css'
 
 export default function App() {
 
@@ -80,14 +81,18 @@ export default function App() {
           <Inputs dispatch={dispatch} unit={state.unitGroup.unitGroup} />
 
           {/* Render weather components if weather data is available */}
-          {state.weather && (
+          {state.weather? (
             <>
               <TimeAndLocation weather={state.weather} />
               <TemperatureAndDetails weather={state.weather} />
               <ForecastList title='HOURLY FORECAST' data={state.weather.hourly} />
               <ForecastList title='DAILY FORECAST' data={state.weather.daily} />
             </>
-          )}
+          ) :
+            <div className=' flex justify-center items-center h-96 sm:hidden'>
+              <div className={loadingStyle.ldsRing}><div></div><div></div><div></div><div></div></div>
+            </div>
+          }
         </div>
         {/* Render toast notifications container */}
         <ToastContainer autoClose={2000} theme='colored' />
